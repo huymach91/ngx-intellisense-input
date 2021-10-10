@@ -17,7 +17,6 @@ export class AppComponent implements OnInit {
   constructor() {}
 
   public onChangeFormula(value: string) {
-    console.log(value);
     this.formula = value;
   }
 
