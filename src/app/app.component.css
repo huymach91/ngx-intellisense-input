@@ -2,3 +2,8 @@ p,
 h3 {
   margin: 5px 0;
 }
+label,
+div,
+p {
+  font-size: 14px;
+}
