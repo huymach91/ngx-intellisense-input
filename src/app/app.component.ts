@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   public intelisenseInputSingleConfig: IIntellisenseInputConfig;
   public intelisenseInputMultipleConfig: IIntellisenseInputConfig;
   public formula;
+  public queryText;
 
   constructor() {}
 
@@ -21,7 +22,7 @@ export class AppComponent implements OnInit {
   }
 
   public onChangeQueryText(value: string) {
-    // console.log(value);
+    this.queryText = value;
   }
 
   ngOnInit() {

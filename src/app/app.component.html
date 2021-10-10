@@ -3,12 +3,12 @@
 
 <h3>Single Line</h3>
 <div>
-  <b>Formula:</b>
+  <label><b>Formula:</b></label>
   <intellisense-input
     [config]="intelisenseInputSingleConfig"
     (onChange)="onChangeFormula($event)"
   ></intellisense-input>
-  <div><small> examples: (#TOTAL + #SUBTOTAL) / #UNITS </small></div>
+  <div><small> example: (#TOTAL + #SUBTOTAL + 1000) / #UNITS </small></div>
   <div>
     model:
     <pre>{{ formula | json }}</pre>
@@ -17,7 +17,15 @@
 <br />
 <h3>Mutiple Line</h3>
 <p>press 'enter' to make new line</p>
-<intellisense-input
-  [config]="intelisenseInputMultipleConfig"
-  (onChange)="onChangeQueryText($event)"
-></intellisense-input>
+<div>
+  <label><b>SQL Query:</b></label>
+  <intellisense-input
+    [config]="intelisenseInputMultipleConfig"
+    (onChange)="onChangeQueryText($event)"
+  ></intellisense-input>
+  example: #SELECT * \n #FROM tblUser \n #WHERE a = '1'
+  <div>
+    model:
+    <pre>{{ queryText | json }}</pre>
+  </div>
+</div>
