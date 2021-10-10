@@ -221,6 +221,8 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
   }
 
   public onKeyup(event: KeyboardEvent) {
+    // emit changes
+    this.emitChanges();
     if (!this.isStartWithHashSymbol) return;
     const caret = this.getCaret(event.target);
     this.nodeEnd = caret.caretNode;
@@ -239,8 +241,6 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
     this.calcDropdownHeight();
     // set coordinate for dropdown menu
     this.setDropdownMenuCoordinate(caret.rect);
-    // emit changes
-    this.emitChanges();
   }
 
   public onEnter() {
