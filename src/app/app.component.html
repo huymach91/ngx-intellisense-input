@@ -1,0 +1,15 @@
+<h2>Ngx Intellisense Input</h2>
+<p></p>
+
+<h3>Single Line</h3>
+<intellisense-input
+  [config]="intelisenseInputSingleConfig"
+  (onChange)="onChangeQueryText($event)"
+></intellisense-input>
+<br />
+<h3>Mutiple Line</h3>
+<p>press 'enter' to make new line</p>
+<intellisense-input
+  [config]="intelisenseInputMultipleConfig"
+  (onChange)="onChangeQueryText($event)"
+></intellisense-input>

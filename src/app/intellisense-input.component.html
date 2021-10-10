@@ -1,0 +1,40 @@
+<div #IntellisenseInputWrapperRef class="query-text-wrapper">
+  <div
+    #IntellisenseInputRef
+    class="query-text-content"
+    (paste)="onPaste($event)"
+    contenteditable="true"
+    [ngStyle]="contentStyle"
+    (keyup.enter)="onEnter()"
+    (keyup)="onKeyup($event)"
+    (keydown)="onKeydown($event)"
+    (blur)="onBlur($event)"
+    [innerHTML]="config.initialValue | safeHtml"
+  ></div>
+  <div
+    (click)="onClickPlaceHolder()"
+    class="query-text-placehoder"
+    *ngIf="!IntellisenseInputRef.textContent && config.placeholder"
+  >
+    {{ config.placeholder }}
+  </div>
+  <div
+    #dropdownMenuRef
+    class="query-text-dropdown-menu"
+    [ngStyle]="dropdownStyle"
+  >
+    <div class="not-found" *ngIf="!filteredReference.length">Not found</div>
+    <ng-container *ngFor="let reference of filteredReference; let i = index">
+      <div
+        class="query-text-dropdown-item"
+        #referenceItem
+        [ngClass]="{ active: currentActiveIndex === i }"
+        (click)="onSelectReference(reference)"
+        (keyup.enter)="onSelectReference(reference)"
+      >
+        {{ reference }}
+      </div>
+      <hr class="divider" *ngIf="i === config.dividerIndex" />
+    </ng-container>
+  </div>
+</div>
