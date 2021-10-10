@@ -1,7 +1,7 @@
-<div #IntellisenseInputWrapperRef class="query-text-wrapper">
+<div #IntellisenseInputWrapperRef class="intellisense-input-wrapper">
   <div
     #IntellisenseInputRef
-    class="query-text-content"
+    class="intellisense-input-content"
     (paste)="onPaste($event)"
     contenteditable="true"
     [ngStyle]="contentStyle"
@@ -13,20 +13,20 @@
   ></div>
   <div
     (click)="onClickPlaceHolder()"
-    class="query-text-placehoder"
+    class="intellisense-input-placehoder"
     *ngIf="!IntellisenseInputRef.textContent && config.placeholder"
   >
     {{ config.placeholder }}
   </div>
   <div
     #dropdownMenuRef
-    class="query-text-dropdown-menu"
+    class="intellisense-input-dropdown-menu"
     [ngStyle]="dropdownStyle"
   >
     <div class="not-found" *ngIf="!filteredReference.length">Not found</div>
     <ng-container *ngFor="let reference of filteredReference; let i = index">
       <div
-        class="query-text-dropdown-item"
+        class="intellisense-input-dropdown-item"
         #referenceItem
         [ngClass]="{ active: currentActiveIndex === i }"
         (click)="onSelectReference(reference)"

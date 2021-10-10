@@ -1,4 +1,4 @@
-.query-text-content {
+.intellisense-input-content {
   width: 90%;
   padding-top: 3px;
   padding-bottom: 3px;
@@ -9,10 +9,10 @@
   font-size: 0.9em;
 }
 
-.query-text-wrapper {
+.intellisense-input-wrapper {
   position: relative;
 
-  .query-text-dropdown-menu {
+  .intellisense-input-dropdown-menu {
     min-width: 180px;
     padding: 5px;
     position: fixed;
@@ -24,17 +24,17 @@
     z-index: 3;
   }
 
-  .query-text-dropdown-item {
+  .intellisense-input-dropdown-item {
     padding: 5px;
     cursor: pointer;
   }
 
-  .query-text-dropdown-item.active {
+  .intellisense-input-dropdown-item.active {
     background-color: whitesmoke;
   }
 }
 
-.query-text-placehoder {
+.intellisense-input-placehoder {
   position: absolute;
   color: gray;
   top: 3px;
