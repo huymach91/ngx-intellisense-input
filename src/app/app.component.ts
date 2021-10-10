@@ -12,8 +12,13 @@ import {
 export class AppComponent implements OnInit {
   public intelisenseInputSingleConfig: IIntellisenseInputConfig;
   public intelisenseInputMultipleConfig: IIntellisenseInputConfig;
+  public formula;
 
   constructor() {}
+
+  public onChangeFormula(value: string) {
+    this.formula = value;
+  }
 
   public onChangeQueryText(value: string) {
     // console.log(value);
@@ -27,14 +32,7 @@ export class AppComponent implements OnInit {
     setTimeout(() => {
       this.intelisenseInputSingleConfig = {
         type: QUERY_TEXT_INPUT_TYPE.SINGLE,
-        references: [
-          '#SELECT',
-          '#FROM',
-          '#WHERE',
-          '#ORDER BY',
-          '#GROUP BY',
-          'HAVING',
-        ],
+        references: ['#TOTAL', '#SUBTOTAL', '#UNITS'],
         initialValue: '',
         placeholder: "Type '#' to make a reference",
         dividerIndex: 2,

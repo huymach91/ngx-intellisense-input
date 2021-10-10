@@ -2,10 +2,18 @@
 <p></p>
 
 <h3>Single Line</h3>
-<intellisense-input
-  [config]="intelisenseInputSingleConfig"
-  (onChange)="onChangeQueryText($event)"
-></intellisense-input>
+<div>
+  <b>Formula:</b>
+  <intellisense-input
+    [config]="intelisenseInputSingleConfig"
+    (onChange)="onChangeFormula($event)"
+  ></intellisense-input>
+  <div><small> examples: (#TOTAL + #SUBTOTAL) / #UNITS </small></div>
+  <div>
+    model:
+    <pre>{{ formula | json }}</pre>
+  </div>
+</div>
 <br />
 <h3>Mutiple Line</h3>
 <p>press 'enter' to make new line</p>
