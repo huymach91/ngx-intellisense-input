@@ -1,26 +1,23 @@
-export function validateFormula(value: string) {
-  const formulaError = null;
-
+export function validateFormula(value: string, references: Array<string>) {
   if (!value) return;
 
   // case 1: valid characters
   if (/[^+\-%*/a-zA-Z0-9\(\)\s#]+/gi.test(value)) {
-    this.formulaError = {
+    return {
       invalidCharacters: true,
     };
-    return;
   }
 
   // case 2: only allow '#' var and number as parameter
   const terms = value.split(/[\/\*\+\-\%]/);
 
   // case 3: at least 2 terms
+  console.log(terms);
 
   if (terms.length < 2) {
-    this.formulaError = {
+    return {
       atLeast2Terms: true,
     };
-    return;
   }
 
   terms.forEach((term: string, index: number, self) => {
@@ -36,15 +33,14 @@ export function validateFormula(value: string) {
     // param which starts without '#' and not in the reference list will be invalid
     if (
       isNaN(+cleanTerm) &&
-      (cleanTerm.charAt(0) !== '#' ||
-        this.config.references.indexOf(cleanTerm) === -1)
+      (cleanTerm.charAt(0) !== '#' || references.indexOf(cleanTerm) === -1)
     ) {
       isNotTerm = true;
     }
 
     // it is not a term of mathematic expression
     if (isNotTerm) {
-      this.formulaError = {
+      return {
         invalidTerms: true,
       };
     }
@@ -52,10 +48,12 @@ export function validateFormula(value: string) {
 
   // case 4: dividing by 0
   if (/\/\s{0,}0/g.test(value)) {
-    this.formulaError = {
+    return {
       dividingByZero: true,
     };
   }
+
+  return;
 }
 
 export function breakLineAsBr() {

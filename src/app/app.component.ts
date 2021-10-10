@@ -3,6 +3,7 @@ import {
   IIntellisenseInputConfig,
   INTELLISENSE_INPUT_TYPE,
 } from './intellisense-input.component';
+import { validateFormula } from './intellisense-input.helper';
 
 @Component({
   selector: 'my-app',
@@ -13,12 +14,17 @@ export class AppComponent implements OnInit {
   public intelisenseInputSingleConfig: IIntellisenseInputConfig;
   public intelisenseInputMultipleConfig: IIntellisenseInputConfig;
   public formula;
+  public fomulaError = {};
   public queryText;
 
   constructor() {}
 
-  public onChangeFormula(value: any) {
-    this.formula = value;
+  public onChangeFormula(data: any) {
+    this.fomulaError = validateFormula(
+      data.value,
+      this.intelisenseInputSingleConfig.references
+    );
+    this.formula = data;
   }
 
   public onChangeQueryText(value: any) {
