@@ -238,7 +238,6 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
     );
     this.calcDropdownHeight();
     // set coordinate for dropdown menu
-    console.log(caret.rect);
     this.setDropdownMenuCoordinate(caret.rect);
     // emit changes
     this.emitChanges();
