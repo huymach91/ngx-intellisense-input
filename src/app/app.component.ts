@@ -17,11 +17,11 @@ export class AppComponent implements OnInit {
 
   constructor() {}
 
-  public onChangeFormula(value: string) {
+  public onChangeFormula(value: any) {
     this.formula = value;
   }
 
-  public onChangeQueryText(value: string) {
+  public onChangeQueryText(value: any) {
     this.queryText = value;
   }
 
