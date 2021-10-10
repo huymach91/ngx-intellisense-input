@@ -7,3 +7,6 @@ div,
 p {
   font-size: 14px;
 }
+pre {
+  line-height: 10px;
+}
