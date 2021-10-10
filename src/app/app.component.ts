@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
   IIntellisenseInputConfig,
-  QUERY_TEXT_INPUT_TYPE,
+  INTELLISENSE_INPUT_TYPE,
 } from './intellisense-input.component';
 
 @Component({
@@ -32,16 +32,16 @@ export class AppComponent implements OnInit {
   public loadReferencesFromApi() {
     setTimeout(() => {
       this.intelisenseInputSingleConfig = {
-        type: QUERY_TEXT_INPUT_TYPE.SINGLE,
+        type: INTELLISENSE_INPUT_TYPE.SINGLE,
         references: ['#TOTAL', '#SUBTOTAL', '#UNITS'],
         initialValue: '',
         placeholder: "Type '#' to make a reference",
-        dividerIndex: 2,
+        dividerIndex: 1,
         limit: 4,
       };
 
       this.intelisenseInputMultipleConfig = {
-        type: QUERY_TEXT_INPUT_TYPE.MULTIPLE,
+        type: INTELLISENSE_INPUT_TYPE.MULTIPLE,
         references: [
           '#SELECT',
           '#FROM',

@@ -15,13 +15,13 @@ import {
 
 declare var document: any;
 
-export enum QUERY_TEXT_INPUT_TYPE {
+export enum INTELLISENSE_INPUT_TYPE {
   SINGLE = 1,
   MULTIPLE = 2,
 }
 
 export interface IIntellisenseInputConfig {
-  type: QUERY_TEXT_INPUT_TYPE;
+  type: INTELLISENSE_INPUT_TYPE;
   references: Array<string>;
   initialValue: string;
   placeholder: string;
@@ -50,7 +50,7 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
     }
     // highlight reference word and break lines
     this.config.initialValue = this.highlightReference(value.initialValue);
-    if (this.config.type === QUERY_TEXT_INPUT_TYPE.MULTIPLE) {
+    if (this.config.type === INTELLISENSE_INPUT_TYPE.MULTIPLE) {
       this.config.initialValue = this.breaklines(this.config.initialValue);
     }
   }
@@ -58,7 +58,7 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
   @Output() onChange = new EventEmitter();
 
   public config: IIntellisenseInputConfig = {
-    type: QUERY_TEXT_INPUT_TYPE.SINGLE,
+    type: INTELLISENSE_INPUT_TYPE.SINGLE,
     references: [],
     initialValue: '',
     placeholder: "Type '#' to make a reference",
@@ -98,7 +98,7 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
   constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
   ngOnInit() {
-    if (this.config.type === QUERY_TEXT_INPUT_TYPE.MULTIPLE) {
+    if (this.config.type === INTELLISENSE_INPUT_TYPE.MULTIPLE) {
       this.contentStyle = {
         'white-space': '',
         'min-height': '60px',
@@ -174,7 +174,7 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
       (this.isStartWithHashSymbol && event.key === 'Enter') ||
       (!this.isStartWithHashSymbol &&
         event.key === 'Enter' &&
-        this.config.type === QUERY_TEXT_INPUT_TYPE.SINGLE)
+        this.config.type === INTELLISENSE_INPUT_TYPE.SINGLE)
     ) {
       return false;
     }
@@ -210,7 +210,7 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
 
     if (
       event.key === 'Enter' &&
-      this.config.type === QUERY_TEXT_INPUT_TYPE.MULTIPLE
+      this.config.type === INTELLISENSE_INPUT_TYPE.MULTIPLE
     ) {
       const caret = this.getCaret(event.target);
       this.customBreakLine(caret);
