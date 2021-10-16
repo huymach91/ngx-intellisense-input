@@ -2,11 +2,15 @@
 
 Angular version 12.2.0.
 
+## Demo
+
+[Stackblitz](https://hm-angular-intellisense-input.stackblitz.io)
+
 ## Input Configuration
 
 | Parameter    | Data Type               | Note                                                                 |
 | ------------ | ----------------------- | -------------------------------------------------------------------- |
-| type         | INTELLISENSE_INPUT_TYPE | INTELLISENSE_INPUT_TYPE.SINGLE or INTELLISENSE_INPUT_TYPE.MULTIPLE   |
+| type         | INTELLISENSE_INPUT_TYPE | SINGLE or MULTIPLE                                                   |
 | references   | Array<string>           | array item starts with '#', example: ['#TOTAL', 'SUBTOTAL', 'UNITS'] |
 | placeholder  | string                  | 'Type '#' to make a reference'                                       |
 | dividerIndex | number                  | divider index starts from 0                                          |
