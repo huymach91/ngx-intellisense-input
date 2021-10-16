@@ -539,6 +539,7 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
         span.style[0] === 'font-size' &&
         span.innerText.trim() === '' &&
         /\w/.test(span.nodeValue) &&
+        span.firstChild &&
         span.firstChild.nodeName !== 'BR'
       ) {
         console.log('case 2.1', span);
@@ -670,9 +671,12 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
       caretNode.nodeName === 'DIV' &&
       caretNode.childNodes.length
     ) {
+      console.log('1');
       // it's first child must be contenteditable=false
       const firstChild = caretNode.firstChild as HTMLSpanElement;
-      const isContentEditable = firstChild.hasAttribute('contenteditable');
+      const isContentEditable = firstChild.hasAttribute
+        ? firstChild.hasAttribute('contenteditable')
+        : false;
       if (isContentEditable) {
         this.addWhiteSpaceNode(caretNode, firstChild);
       }
@@ -684,6 +688,7 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
       caretNode.nodeName === 'SPAN' &&
       caretNode.hasAttribute('contenteditable')
     ) {
+      console.log('2');
       this.addWhiteSpaceNode(caretNode.parentNode, caretNode);
     }
     // case 3: caret at div with only br as child
@@ -696,8 +701,10 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
       caretNode &&
       caretNode.nodeName === 'DIV' &&
       caretNode.childNodes.length === 1 &&
+      caretNode.firstChild &&
       caretNode.firstChild.nodeName === 'BR'
     ) {
+      console.log('3');
       caretNode.remove();
     }
     // case 4: caret at .intellisense-input-content.div
@@ -710,11 +717,15 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
         grandChild &&
         grandChild.nodeName === 'BR'
       ) {
+        console.log('4');
         firstChild.remove();
       }
     }
 
     // case 5:
-    console.log('case 5', caretNode);
+    // if (caretNode && !caretNode.previousSibling) {
+    //   console.log('case 5', caretNode, caretNode.parentNode);
+    //   this.addWhiteSpaceNode(caretNode.parentNode, caretNode);
+    // }
   }
 }
