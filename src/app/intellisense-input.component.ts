@@ -183,6 +183,9 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
       const caret = this.getCaret(event.target);
       this.customBackSpace(caret);
       this.emitChanges();
+      setTimeout(() => {
+        this.cleanUpContent();
+      }, 30);
     }
 
     if (
@@ -193,7 +196,7 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
       this.customBreakLine(caret);
       setTimeout(() => {
         this.cleanUpContent();
-      }, 30);
+      }, 50);
     }
   }
 
@@ -527,21 +530,33 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
       });
     }
     // case 2: span 0.9em, whitespace
-    // const spanElements = IntellisenseInputElement.querySelectorAll('span');
-    // spanElements.forEach((span) => {
-    //   if (
-    //     span.style &&
-    //     span.style[0] === 'font-size' &&
-    //     span.innerText.trim() === '' &&
-    //     /\w/.test(span.nodeValue)
-    //   ) {
-    //     span.remove();
-    //   }
-    // });
+    const spanElements = IntellisenseInputElement.querySelectorAll('span');
+    spanElements.forEach((span) => {
+      // case 2.1: remove span with font-size: 0.9em and whitespace childNodes
+      if (
+        span.style &&
+        span.style[0] === 'font-size' &&
+        span.innerText.trim() === '' &&
+        /\w/.test(span.nodeValue)
+      ) {
+        span.remove();
+      }
+      // case 2.2: remove span with font-size: 0.9em
+      if (span.className.includes('highlighted')) {
+        span.style.removeProperty('font-size');
+      }
+      // case 2.3: update click for span
+      if (span.className.includes('highlighted')) {
+        span.onclick = (event: any) => {
+          this.setCaret(event.target.firstChild, 0);
+        };
+      }
+    });
   }
 
   private addWhiteSpaceNode(parent: Node, beforeNode) {
     const textNode = document.createTextNode('\u00A0');
+    console.log(textNode);
     parent.insertBefore(textNode, beforeNode);
   }
 
@@ -693,5 +708,8 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
         firstChild.remove();
       }
     }
+
+    // case 5:
+    console.log('case 5', caretNode);
   }
 }
