@@ -643,17 +643,17 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
       });
     }
     // case 2: span 0.9em, whitespace
-    const spanElements = IntellisenseInputElement.querySelectorAll('span');
-    spanElements.forEach((span) => {
-      if (
-        span.style &&
-        span.style[0] === 'font-size' &&
-        span.innerText.trim() === '' &&
-        /\w/.test(span.nodeValue)
-      ) {
-        span.remove();
-      }
-    });
+    // const spanElements = IntellisenseInputElement.querySelectorAll('span');
+    // spanElements.forEach((span) => {
+    //   if (
+    //     span.style &&
+    //     span.style[0] === 'font-size' &&
+    //     span.innerText.trim() === '' &&
+    //     /\w/.test(span.nodeValue)
+    //   ) {
+    //     span.remove();
+    //   }
+    // });
   }
 
   private addWhiteSpaceNode(parent: Node, beforeNode) {
