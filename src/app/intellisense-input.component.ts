@@ -556,7 +556,6 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
 
   private addWhiteSpaceNode(parent: Node, beforeNode) {
     const textNode = document.createTextNode('\u00A0');
-    console.log(textNode);
     parent.insertBefore(textNode, beforeNode);
   }
 
