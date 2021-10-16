@@ -1,6 +1,6 @@
 # Intellisense Input
 
-Angular version 12.1.0
+Angular version 12.2.0.
 
 ## Demo
 
@@ -28,9 +28,9 @@ Angular version 12.1.0
 
 ## Screenshots
 
-![App Screenshot](https://raw.githubusercontent.com/huymach91/hm-angular-intellisense-input/master/src/pictures/single-line.png?token=AHXRERJEZXEUN5FDS7PDJVDBNLL5I)
+![App Screenshot](https://raw.githubusercontent.com/huymach91/ngx-intellisense-input/master/src/pictures/single-line.png)
 
-![App Screenshot](https://raw.githubusercontent.com/huymach91/hm-angular-intellisense-input/master/src/pictures/multiple-line.png?token=AHXRERPYFJKPTJNQ2WYEHR3BNLMDG)
+![App Screenshot](https://raw.githubusercontent.com/huymach91/ngx-intellisense-input/master/src/pictures/multiple-line-2.png)
 
 ## Browser Support
 
