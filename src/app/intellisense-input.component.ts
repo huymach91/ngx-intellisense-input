@@ -525,7 +525,6 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
     if (divElements.length) {
       divElements.forEach((divElement) => {
         if (!divElement.childNodes.length) {
-          console.log('case 1');
           divElement.remove();
         }
       });
@@ -542,7 +541,6 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
         span.firstChild &&
         span.firstChild.nodeName !== 'BR'
       ) {
-        console.log('case 2.1', span);
         span.remove();
       }
       // case 2.2: remove span with font-size: 0.9em
@@ -564,7 +562,6 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
   }
 
   private customBreakLine(caret: ICaret) {
-    console.log(caret);
     if (!caret.caretPosition && !caret.caretNode) return;
     setTimeout(() => {
       const selection = window.getSelection();
@@ -630,7 +627,6 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
         highlighedElement.previousSibling &&
         highlighedElement.previousSibling.nodeName === '#text'
       ) {
-        console.log('3.1');
         this.setCaret(
           highlighedElement.previousSibling,
           highlighedElement.previousSibling.nodeValue.length
@@ -642,7 +638,6 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
         !highlighedElement.previousSibling &&
         highlighedElement.parentElement.nodeName === 'DIV'
       ) {
-        console.log('3.2');
         this.setCaret(highlighedElement.parentElement, 0);
       }
       // case 3.3: if previous node is null, then parent must be a span (highlighted)
@@ -652,7 +647,6 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
         highlighedElement.className.includes('highlighted') &&
         highlighedElement.previousSibling
       ) {
-        console.log('3.3');
         this.setCaret(
           highlighedElement.previousSibling,
           highlighedElement.previousSibling.nodeValue
@@ -671,7 +665,6 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
       caretNode.nodeName === 'DIV' &&
       caretNode.childNodes.length
     ) {
-      console.log('1');
       // it's first child must be contenteditable=false
       const firstChild = caretNode.firstChild as HTMLSpanElement;
       const isContentEditable = firstChild.hasAttribute
@@ -688,7 +681,6 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
       caretNode.nodeName === 'SPAN' &&
       caretNode.hasAttribute('contenteditable')
     ) {
-      console.log('2');
       this.addWhiteSpaceNode(caretNode.parentNode, caretNode);
     }
     // case 3: caret at div with only br as child
@@ -704,7 +696,6 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
       caretNode.firstChild &&
       caretNode.firstChild.nodeName === 'BR'
     ) {
-      console.log('3');
       caretNode.remove();
     }
     // case 4: caret at .intellisense-input-content.div
@@ -717,7 +708,6 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
         grandChild &&
         grandChild.nodeName === 'BR'
       ) {
-        console.log('4');
         firstChild.remove();
       }
     }
