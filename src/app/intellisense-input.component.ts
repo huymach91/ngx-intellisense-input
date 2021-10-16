@@ -181,30 +181,7 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
 
     if (event.key === 'Backspace') {
       const caret = this.getCaret(event.target);
-      const caretNode = caret.caretNode;
-      // case 1: focus on div
-      if (
-        caretNode &&
-        caretNode.nodeName === 'DIV' &&
-        caretNode.childNodes.length
-      ) {
-        // it's first child must be contenteditable=false
-        const firstChild = caretNode.firstChild as HTMLSpanElement;
-        const isContentEditable = firstChild.hasAttribute('contenteditable');
-        if (isContentEditable) {
-          this.addWhiteSpaceNode(caretNode, firstChild);
-        }
-      }
-      // caes 2: caret on span with contenteditable=false, ex: [ #SELECT * \n|#FROM ]
-      // note: '|' is caret
-      if (
-        caretNode &&
-        caretNode.nodeName === 'SPAN' &&
-        caretNode.hasAttribute('contenteditable')
-      ) {
-        this.addWhiteSpaceNode(caretNode.parentNode, caretNode);
-      }
-      // case
+      this.customBackSpace(caret);
       this.emitChanges();
     }
 
@@ -304,6 +281,9 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
     node.setAttribute('contenteditable', 'false');
     node.style.setProperty('color', 'blue');
     node.setAttribute('class', 'highlighted');
+    node.onclick = (event: any) => {
+      this.setCaret(event.target.firstChild, 0);
+    };
     return node;
   }
 
@@ -534,7 +514,39 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
     });
   }
 
+  private cleanUpContent() {
+    const IntellisenseInputElement = this.IntellisenseInputRef
+      .nativeElement as HTMLDivElement;
+    const divElements = IntellisenseInputElement.querySelectorAll('div');
+    // case 1: a div with no childNodes
+    if (divElements.length) {
+      divElements.forEach((divElement) => {
+        if (!divElement.childNodes.length) {
+          divElement.remove();
+        }
+      });
+    }
+    // case 2: span 0.9em, whitespace
+    // const spanElements = IntellisenseInputElement.querySelectorAll('span');
+    // spanElements.forEach((span) => {
+    //   if (
+    //     span.style &&
+    //     span.style[0] === 'font-size' &&
+    //     span.innerText.trim() === '' &&
+    //     /\w/.test(span.nodeValue)
+    //   ) {
+    //     span.remove();
+    //   }
+    // });
+  }
+
+  private addWhiteSpaceNode(parent: Node, beforeNode) {
+    const textNode = document.createTextNode('\u00A0');
+    parent.insertBefore(textNode, beforeNode);
+  }
+
   private customBreakLine(caret: ICaret) {
+    console.log(caret);
     if (!caret.caretPosition && !caret.caretNode) return;
     setTimeout(() => {
       const selection = window.getSelection();
@@ -630,34 +642,42 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  private cleanUpContent() {
-    const IntellisenseInputElement = this.IntellisenseInputRef
-      .nativeElement as HTMLDivElement;
-    const divElements = IntellisenseInputElement.querySelectorAll('div');
-    // case 1: a div with no childNodes
-    if (divElements.length) {
-      divElements.forEach((divElement) => {
-        if (!divElement.childNodes.length) {
-          divElement.remove();
-        }
-      });
+  private customBackSpace(caret: ICaret) {
+    const caretNode = caret.caretNode;
+    // case 1: focus on div
+    if (
+      caretNode &&
+      caretNode.nodeName === 'DIV' &&
+      caretNode.childNodes.length
+    ) {
+      console.log('case 1');
+      // it's first child must be contenteditable=false
+      const firstChild = caretNode.firstChild as HTMLSpanElement;
+      const isContentEditable = firstChild.hasAttribute('contenteditable');
+      if (isContentEditable) {
+        this.addWhiteSpaceNode(caretNode, firstChild);
+      }
     }
-    // case 2: span 0.9em, whitespace
-    // const spanElements = IntellisenseInputElement.querySelectorAll('span');
-    // spanElements.forEach((span) => {
-    //   if (
-    //     span.style &&
-    //     span.style[0] === 'font-size' &&
-    //     span.innerText.trim() === '' &&
-    //     /\w/.test(span.nodeValue)
-    //   ) {
-    //     span.remove();
-    //   }
-    // });
-  }
-
-  private addWhiteSpaceNode(parent: Node, beforeNode) {
-    const textNode = document.createTextNode('\u00A0');
-    parent.insertBefore(textNode, beforeNode);
+    // caes 2: caret on span with contenteditable=false, ex: [ #SELECT * \n|#FROM ]
+    // note: '|' is caret
+    if (
+      caretNode &&
+      caretNode.nodeName === 'SPAN' &&
+      caretNode.hasAttribute('contenteditable')
+    ) {
+      console.log('case 2');
+      this.addWhiteSpaceNode(caretNode.parentNode, caretNode);
+    }
+    // case 3: caret at div with only br as child
+    console.log('caretNode', caretNode);
+    if (
+      caretNode &&
+      caretNode.nodeName === 'DIV' &&
+      caretNode.childNodes.length === 1 &&
+      caretNode.firstChild.nodeName === 'BR'
+    ) {
+      console.log('case 3 jerer');
+      caretNode.remove();
+    }
   }
 }
