@@ -37,11 +37,11 @@ interface ICaret {
 }
 
 @Component({
-  selector: 'intellisense-input',
-  templateUrl: './intellisense-input.component.html',
-  styleUrls: ['./intellisense-input.component.scss'],
+  selector: 'ngx-intellisense-input',
+  templateUrl: './ngx-intellisense-input.component.html',
+  styleUrls: ['./ngx-intellisense-input.component.scss'],
 })
-export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
+export class NgxIntellisenseInputComponent implements OnInit, AfterViewChecked {
   @Input('config') set setConfig(value: IIntellisenseInputConfig) {
     if (!value) return;
     this.config = value;

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {
   IIntellisenseInputConfig,
   INTELLISENSE_INPUT_TYPE,
-} from './intellisense-input.component';
-import { validateFormula } from './intellisense-input.helper';
+} from './ngx-intellisense-input.component';
+import { validateFormula } from './ngx-intellisense-input.helper';
 
 @Component({
   selector: 'my-app',

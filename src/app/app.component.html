@@ -13,10 +13,10 @@
 <h3>Single Line</h3>
 <div>
   <label><b>Formula:</b></label>
-  <intellisense-input
+  <ngx-intellisense-input
     [config]="intelisenseInputSingleConfig"
     (onChange)="onChangeFormula($event)"
-  ></intellisense-input>
+  ></ngx-intellisense-input>
   <div><small> example: (#TOTAL + #SUBTOTAL + 1000) / #UNITS </small></div>
   <div>
     model:
@@ -32,10 +32,10 @@
 <p>press 'enter' to make new line</p>
 <div>
   <label><b>SQL Query:</b></label>
-  <intellisense-input
+  <ngx-intellisense-input
     [config]="intelisenseInputMultipleConfig"
     (onChange)="onChangeQueryText($event)"
-  ></intellisense-input>
+  ></ngx-intellisense-input>
   example: #SELECT * \n #FROM tblUser \n #WHERE a = '1'
   <div>
     model:
