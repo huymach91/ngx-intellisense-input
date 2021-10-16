@@ -181,6 +181,8 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
 
     if (event.key === 'Backspace') {
       const caret = this.getCaret(event.target);
+      const caretNode = caret.caretNode;
+      // case 1: not allow backspace on contenteditable = false
       this.customBackSpace(caret);
       this.emitChanges();
       setTimeout(() => {
@@ -281,7 +283,7 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
   private createNode(nodeValue: string): HTMLSpanElement {
     const node = document.createElement('span');
     node.innerText = nodeValue;
-    node.setAttribute('contenteditable', 'false');
+    // node.setAttribute('contenteditable', 'false');
     node.style.setProperty('color', 'blue');
     node.setAttribute('class', 'highlighted');
     node.onclick = (event: any) => {
