@@ -650,7 +650,6 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
       caretNode.nodeName === 'DIV' &&
       caretNode.childNodes.length
     ) {
-      console.log('case 1');
       // it's first child must be contenteditable=false
       const firstChild = caretNode.firstChild as HTMLSpanElement;
       const isContentEditable = firstChild.hasAttribute('contenteditable');
@@ -665,19 +664,34 @@ export class IntellisenseInputComponent implements OnInit, AfterViewChecked {
       caretNode.nodeName === 'SPAN' &&
       caretNode.hasAttribute('contenteditable')
     ) {
-      console.log('case 2');
       this.addWhiteSpaceNode(caretNode.parentNode, caretNode);
     }
     // case 3: caret at div with only br as child
-    console.log('caretNode', caretNode);
+    // example:
+    // [
+    //  |
+    //  #SELECT * #FROM tblUser
+    // ]
     if (
       caretNode &&
       caretNode.nodeName === 'DIV' &&
       caretNode.childNodes.length === 1 &&
       caretNode.firstChild.nodeName === 'BR'
     ) {
-      console.log('case 3 jerer');
       caretNode.remove();
+    }
+    // case 4: caret at .intellisense-input-content.div
+    if (caretNode && caretNode === this.IntellisenseInputRef.nativeElement) {
+      const firstChild = caretNode.firstChild as HTMLDivElement;
+      const grandChild = firstChild.firstChild as HTMLBRElement;
+      if (
+        firstChild.nodeName === 'DIV' &&
+        firstChild.childNodes.length === 1 &&
+        grandChild &&
+        grandChild.nodeName === 'BR'
+      ) {
+        firstChild.remove();
+      }
     }
   }
 }
