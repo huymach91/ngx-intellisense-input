@@ -4,7 +4,7 @@ Angular version 12.1.0.
 
 ## Demo
 
-[Stackblitz](https://hm-angular-intellisense-input.stackblitz.io)
+[Stackblitz](https://stackblitz.com/edit/hm-angular-intellisense-input)
 
 ## Input Configuration
 
