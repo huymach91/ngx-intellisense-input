@@ -12,7 +12,6 @@ export function validateFormula(value: string, references: Array<string>) {
   const terms = value.split(/[\/\*\+\-\%]/);
 
   // case 3: at least 2 terms
-  console.log(terms);
 
   if (terms.length < 2) {
     return {
