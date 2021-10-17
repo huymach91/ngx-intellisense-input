@@ -343,13 +343,20 @@ export class NgxIntellisenseInputComponent implements OnInit, AfterViewChecked {
 
   public setDropdownMenuCoordinate(rect: DOMRect) {
     if (!rect || !this.dropdownMenuRef) return;
+    // wrapper
+    const wrapperElement = this.IntellisenseInputWrapperRef
+      .nativeElement as HTMLDivElement;
+    const wrapperRect = wrapperElement.getBoundingClientRect();
+    const wrapperTop = wrapperRect.top;
+    const wrapperLeft = wrapperRect.left;
+    // dropdown
     const dropdownMenuElement = this.dropdownMenuRef
       .nativeElement as HTMLDivElement;
-    dropdownMenuElement.style.setProperty(
-      'left',
-      rect.left + rect.width + 'px'
-    );
-    dropdownMenuElement.style.setProperty('top', rect.top + 'px');
+    const dropdownLeft = rect.left - wrapperLeft;
+    const dropdownTop = rect.top - wrapperTop;
+    // set cooridinate for dropdown
+    dropdownMenuElement.style.setProperty('left', dropdownLeft + 'px');
+    dropdownMenuElement.style.setProperty('top', dropdownTop + 'px');
   }
 
   private removeSelectionAt(node: any, offsetStart: number, offsetEnd: number) {
