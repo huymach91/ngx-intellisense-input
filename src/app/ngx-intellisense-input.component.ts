@@ -283,7 +283,7 @@ export class NgxIntellisenseInputComponent implements OnInit, AfterViewChecked {
   private createNode(nodeValue: string): HTMLSpanElement {
     const node = document.createElement('span');
     node.innerText = nodeValue;
-    // node.setAttribute('contenteditable', 'false');
+    node.setAttribute('contenteditable', 'false');
     node.style.setProperty('color', 'blue');
     node.setAttribute('class', 'highlighted');
     node.onclick = (event: any) => {
