@@ -1,10 +1,10 @@
 # Intellisense Input
 
-Angular version 12.1.0. [Buy Me a Coffee](https://stackblitz.com/edit/ngx-usa-week-calendar)
+Angular version 12.1.0. [Buy Me a Coffee](https://www.buymeacoffee.com/huymax)
 
 ## Demo
 
-[Stackblitz](https://www.buymeacoffee.com/huymax)
+[Stackblitz](https://stackblitz.com/edit/ngx-usa-week-calendar)
 
 ## Input Configuration
 
