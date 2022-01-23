@@ -4,7 +4,7 @@ Angular version 12.1.0. [Buy Me a Coffee](https://www.buymeacoffee.com/huymax)
 
 ## Demo
 
-[Stackblitz](https://stackblitz.com/edit/ngx-usa-week-calendar)
+[Stackblitz](https://stackblitz.com/edit/hm-angular-intellisense-input)
 
 ## Input Configuration
 
